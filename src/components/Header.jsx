@@ -24,9 +24,7 @@ const Header = () => {
         <div className='flex items-center gap-4'>
             <li className='list-none'><Link className='font-semibold' to='/'>Home</Link></li>
             <li className='list-none'><Link className='font-semibold' to='/pets-supplies'>Pets & Supplies</Link></li>
-            <li className='list-none'><Link className='font-semibold' to='/pets-supplies'>Supplies</Link></li>
-            <li className='list-none'><Link className='font-semibold' to='/pets-supplies'>Supplies</Link></li>
-            <li className='list-none'><Link className='font-semibold' to='/pets-supplies'>Supplies</Link></li>
+            <li className='list-none'><Link className='font-semibold' to='/latest-listings'>My Listings</Link></li>
         </div>
     </>
     return (

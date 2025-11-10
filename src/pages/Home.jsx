@@ -1,18 +1,18 @@
 import React from 'react';
 import Header from '../components/Header';
 import { Outlet } from 'react-router';
-import Bids from './Bids';
 import Banner from '../components/Banner';
+import MyListing from './MyListing';
 
 const Home = () => {
     return (
         <>
-        {/* banner component */}
-        {/* <Banner /> */}
-        {/* banner component */}
+            {/* banner component */}
+            {/* <Banner /> */}
+            {/* banner component */}
             {/* <!-- HERO (Banner) --> */}
             <section id="home" className="hero-bg text-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+                <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                         <div className="space-y-6">
                             <motion-placeholder className="space-y-3">
@@ -52,7 +52,7 @@ const Home = () => {
 
             {/* <!-- CATEGORIES --> */}
             <section id="categories" className="py-16 bg-soft">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-8">
                         <h2 className="text-2xl font-bold">Browse by Category</h2>
                         <p className="text-gray-600 mt-2">Find pets and products quickly — choose a category to filter listings.</p>
@@ -95,8 +95,10 @@ const Home = () => {
             </section>
 
             {/* <!-- RECENT LISTINGS --> */}
+
             <section id="listings" className="py-16">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+
                     <div className="flex items-center justify-between mb-6">
                         <div>
                             <h3 className="text-xl font-bold">Recent Listings</h3>
@@ -116,157 +118,16 @@ const Home = () => {
                         </div>
                     </div>
 
+
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                        {/* <!-- card 1 --> */}
-                        <article className="bg-white rounded-xl shadow-card overflow-hidden flex flex-col">
-                            <div className="h-44 card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1200&q=60')" }}></div>
-                            <div className="p-4 flex-1 flex flex-col">
-                                <div className="flex items-start justify-between">
-                                    <div>
-                                        <div className="text-lg font-semibold">Golden Retriever Puppy</div>
-                                        <div className="text-sm text-gray-500">Pets • Dhaka</div>
-                                    </div>
-                                    <div className="text-right">
-                                        <div className="text-primary font-bold">Free</div>
-                                        <div className="text-xs text-gray-400">Adoption</div>
-                                    </div>
-                                </div>
-
-                                <p className="mt-3 text-sm text-gray-600 flex-1">Friendly two-month-old golden retriever puppy, vaccinated and playful — perfect for families.</p>
-
-                                <div className="mt-4 flex items-center justify-between">
-                                    <a href="#detail" className="text-sm bg-primary text-white px-3 py-2 rounded-lg">See Details</a>
-                                    <div className="text-xs text-gray-400">Listed: 2025-10-27</div>
-                                </div>
-                            </div>
-                        </article>
-
-                        {/* <!-- card 2 --> */}
-                        <article className="bg-white rounded-xl shadow-card overflow-hidden flex flex-col">
-                            <div className="h-44 card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1556228720-9f8bde6a3d7d?auto=format&fit=crop&w=1200&q=60')" }}></div>
-                            <div className="p-4 flex-1 flex flex-col">
-                                <div className="flex items-start justify-between">
-                                    <div>
-                                        <div className="text-lg font-semibold">Organic Dog Food — 5kg</div>
-                                        <div className="text-sm text-gray-500">Pet Food • Chattogram</div>
-                                    </div>
-                                    <div className="text-right">
-                                        <div className="text-primary font-bold">$25</div>
-                                        <div className="text-xs text-gray-400">Shop</div>
-                                    </div>
-                                </div>
-
-                                <p className="mt-3 text-sm text-gray-600 flex-1">Grain-free, nutrient-dense kibbles ideal for adult dogs with sensitive stomachs.</p>
-
-                                <div className="mt-4 flex items-center justify-between">
-                                    <a href="#detail" className="text-sm bg-primary text-white px-3 py-2 rounded-lg">See Details</a>
-                                    <div className="text-xs text-gray-400">Listed: 2025-11-01</div>
-                                </div>
-                            </div>
-                        </article>
-
-                        {/* <!-- card 3 --> */}
-                        <article className="bg-white rounded-xl shadow-card overflow-hidden flex flex-col">
-                            <div className="h-44 card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1595433562696-8f6a3f8525b2?auto=format&fit=crop&w=1200&q=60')" }}></div>
-                            <div className="p-4 flex-1 flex flex-col">
-                                <div className="flex items-start justify-between">
-                                    <div>
-                                        <div className="text-lg font-semibold">Cat Scratching Tower</div>
-                                        <div className="text-sm text-gray-500">Accessories • Sylhet</div>
-                                    </div>
-                                    <div className="text-right">
-                                        <div className="text-primary font-bold">$45</div>
-                                        <div className="text-xs text-gray-400">Shop</div>
-                                    </div>
-                                </div>
-
-                                <p className="mt-3 text-sm text-gray-600 flex-1">Durable, multi-level scratch tower with comfy platforms — keeps cats active and happy.</p>
-
-                                <div className="mt-4 flex items-center justify-between">
-                                    <a href="#detail" className="text-sm bg-primary text-white px-3 py-2 rounded-lg">See Details</a>
-                                    <div className="text-xs text-gray-400">Listed: 2025-10-20</div>
-                                </div>
-                            </div>
-                        </article>
-
-                        {/* <!-- card 4 --> */}
-                        <article className="bg-white rounded-xl shadow-card overflow-hidden flex flex-col">
-                            <div className="h-44 card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=1200&q=60')" }}></div>
-                            <div className="p-4 flex-1 flex flex-col">
-                                <div className="flex items-start justify-between">
-                                    <div>
-                                        <div className="text-lg font-semibold">Kitten — Orange Tabby</div>
-                                        <div className="text-sm text-gray-500">Pets • Narayanganj</div>
-                                    </div>
-                                    <div className="text-right">
-                                        <div className="text-primary font-bold">Free</div>
-                                        <div className="text-xs text-gray-400">Adoption</div>
-                                    </div>
-                                </div>
-
-                                <p className="mt-3 text-sm text-gray-600 flex-1">Playful and affectionate 3-month-old kitten, litter-trained and social.</p>
-
-                                <div className="mt-4 flex items-center justify-between">
-                                    <a href="#detail" className="text-sm bg-primary text-white px-3 py-2 rounded-lg">See Details</a>
-                                    <div className="text-xs text-gray-400">Listed: 2025-11-03</div>
-                                </div>
-                            </div>
-                        </article>
-
-                        {/* <!-- card 5 --> */}
-                        <article className="bg-white rounded-xl shadow-card overflow-hidden flex flex-col">
-                            <div className="h-44 card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?auto=format&fit=crop&w=1200&q=60')" }}></div>
-                            <div className="p-4 flex-1 flex flex-col">
-                                <div className="flex items-start justify-between">
-                                    <div>
-                                        <div className="text-lg font-semibold">Grooming Kit</div>
-                                        <div className="text-sm text-gray-500">Pet Care Products • Dhaka</div>
-                                    </div>
-                                    <div className="text-right">
-                                        <div className="text-primary font-bold">$19</div>
-                                        <div className="text-xs text-gray-400">Shop</div>
-                                    </div>
-                                </div>
-
-                                <p className="mt-3 text-sm text-gray-600 flex-1">Complete at-home kit with combs, clippers and gentle shampoo for all fur types.</p>
-
-                                <div className="mt-4 flex items-center justify-between">
-                                    <a href="#detail" className="text-sm bg-primary text-white px-3 py-2 rounded-lg">See Details</a>
-                                    <div className="text-xs text-gray-400">Listed: 2025-10-08</div>
-                                </div>
-                            </div>
-                        </article>
-
-                        {/* <!-- card 6 --> */}
-                        <article className="bg-white rounded-xl shadow-card overflow-hidden flex flex-col">
-                            <div className="h-44 card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=60')" }}></div>
-                            <div className="p-4 flex-1 flex flex-col">
-                                <div className="flex items-start justify-between">
-                                    <div>
-                                        <div className="text-lg font-semibold">Puppy Training Class</div>
-                                        <div className="text-sm text-gray-500">Services • Dhaka</div>
-                                    </div>
-                                    <div className="text-right">
-                                        <div className="text-primary font-bold">$60</div>
-                                        <div className="text-xs text-gray-400">Service</div>
-                                    </div>
-                                </div>
-
-                                <p className="mt-3 text-sm text-gray-600 flex-1">Group obedience classes for young dogs — leash training, socialization, basic commands.</p>
-
-                                <div className="mt-4 flex items-center justify-between">
-                                    <a href="#detail" className="text-sm bg-primary text-white px-3 py-2 rounded-lg">See Details</a>
-                                    <div className="text-xs text-gray-400">Listed: 2025-10-15</div>
-                                </div>
-                            </div>
-                        </article>
+                        <MyListing />
                     </div>
                 </div>
             </section>
 
             {/* <!-- WHY ADOPT SECTION --> */}
             <section className="py-16 bg-gradient-to-b from-white to-gray-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 items-center">
+                <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 items-center">
                     <div>
                         <img src="https://images.unsplash.com/photo-1507149833265-60c372daea22?auto=format&fit=crop&w=1400&q=60" alt="Adopt" className="rounded-2xl shadow-lg w-full object-cover h-80" />
                     </div>
@@ -308,7 +169,7 @@ const Home = () => {
             </section>
 
             <section className="py-16">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-8">
                         <h3 className="text-2xl font-bold">Meet Our Pet Heroes</h3>
                         <p className="text-gray-500 mt-2">Stories from local adopters and caregivers who made a difference.</p>
@@ -344,7 +205,7 @@ const Home = () => {
 
             {/* <!-- CTA / DONATION BAND --> */}
             <section className="py-12 bg-gradient-to-r from-primary to-accent text-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
                     <div>
                         <h4 className="text-xl font-semibold">Give Pets Their Second Chance</h4>
                         <p className="text-sm opacity-90 mt-1">Support shelters, foster families, and free adoption clinics with donations or supplies.</p>
