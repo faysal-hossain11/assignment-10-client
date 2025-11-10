@@ -13,7 +13,7 @@ const Header = () => {
         signOutUser()
             .then(() => {
                 console.log("sign out successfully");
-                toast.success("Sign out successfully")
+                toast.warning("Signed out successfully");
             })
             .catch((error) => {
                 console.error("Error signing out: ", error);
@@ -24,7 +24,9 @@ const Header = () => {
         <div className='flex items-center gap-4'>
             <li className='list-none'><Link className='font-semibold' to='/'>Home</Link></li>
             <li className='list-none'><Link className='font-semibold' to='/pets-supplies'>Pets & Supplies</Link></li>
-            <li className='list-none'><Link className='font-semibold' to='/latest-listings'>My Listings</Link></li>
+            {
+                user && <li className='list-none'><Link className='font-semibold' to='/latest-listings'>My Listings</Link></li>
+            }
         </div>
     </>
     return (

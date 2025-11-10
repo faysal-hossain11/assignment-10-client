@@ -2,12 +2,7 @@ import { useEffect, useState } from "react";
 import MyListingCard from "../components/MyListingCard";
 
 const MyListing = () => {
-    // const listingsPromise = fetch('http://localhost:3000/latest-listings').then(res => res.json());
-
-
-    // const allListings = use(listingsPromise);
-    // console.log("all listing", allListings);
-
+    
     const [listings, setListings] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -24,13 +19,13 @@ const MyListing = () => {
         .catch((error) => {
             console.log(error);
         })
-    }, [listings])
+    }, [])
 
 
     if(loading) return <p className="text-center">loading...</p>
 
     return (
-        <div>
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {
                 listings ? (
                     listings.map((listing) => {

@@ -7,10 +7,6 @@ import MyListing from './MyListing';
 const Home = () => {
     return (
         <>
-            {/* banner component */}
-            {/* <Banner /> */}
-            {/* banner component */}
-            {/* <!-- HERO (Banner) --> */}
             <section id="home" className="hero-bg text-white">
                 <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -118,10 +114,9 @@ const Home = () => {
                         </div>
                     </div>
 
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                        <MyListing />
-                    </div>
+                    {/* this is the my listing card */}
+                    <MyListing />
+                    {/* this is the my listing card */}
                 </div>
             </section>
 
