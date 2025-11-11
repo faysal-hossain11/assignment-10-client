@@ -156,7 +156,7 @@ const Register = () => {
                             <label className="label">Photo Url</label>
                             <input type="text" name='photoURL' className="input w-full outline-0" placeholder="Photo Url" />
                         </div>
-                        <button type='submit' className="btn btn-neutral mt-4 w-full">Login</button>
+                        <button type='submit' className="btn btn-neutral mt-4 w-full">Register</button>
                     </form>
                     {/* Google */}
                     <div className='flex gap-4 items-center'>

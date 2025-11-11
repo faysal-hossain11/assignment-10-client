@@ -1,36 +1,45 @@
-import React, { use, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router';
+import React, { use } from 'react';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../context/AuthContext';
+import { toast } from 'react-toastify';
 
 const AddListing = () => {
 
-    const [selectedDate, setSelectedDate] = useState("");
-    const calendarRef = useRef(null);
-
-    const {user} = use(AuthContext);
-
-
-    useEffect(() => {
-        const calendar = calendarRef.current;
-
-        if (!calendar) return;
-
-        const handleChange = (event) => {
-            setSelectedDate(event.target.value);
-        };
-
-        calendar.addEventListener("change", handleChange);
-
-        return () => {
-            calendar.removeEventListener("change", handleChange);
-        };
-    }, []);
-
-
+    const { user } = use(AuthContext);
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
-        e.predentDefault();
-    } 
+        e.preventDefault();
+
+        const listing = {
+            name: e.target.productName.value,
+            category: e.target.category.value,
+            price: e.target.price.value,
+            location: e.target.location.value,
+            description: e.target.description.value,
+            image: e.target.photoURL.value,
+            date: e.target.date.value,
+            email: e.target.email.value
+        }
+
+        fetch('http://localhost:3000/add-listing', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(listing)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("listing saved:", data);
+                toast.success("Listing added successfully");
+                e.target.reset();
+                navigate('/');
+            })
+        
+
+    }
+
 
 
     return (
@@ -44,14 +53,15 @@ const AddListing = () => {
                             <input type="text" name='productName' className="input w-full outline-0" placeholder="Product Name" />
                         </div>
                         <div className='mb-3'>
-                            <label className="label">Category</label>
-                            <div className=''>
-                                <select defaultValue="Pick a color" className="select w-full">
-                                    <option>Crimson</option>
-                                    <option>Amber</option>
-                                    <option>Velvet</option>
-                                </select>
-                            </div>
+                            <label name="category" className="label">Category</label>
+                            <select name="category" className="select w-full" defaultValue="">
+                                <option disabled value="">Pick a category</option>
+                                <option value="Pet">Pet</option>
+                                <option value="Food">Food</option>
+                                <option value="Accessories">Accessories</option>
+                                <option value="Care Products">Care Products</option>
+                            </select>
+
                         </div>
                         <div className='mb-3'>
                             <label className="label">Price</label>
@@ -63,44 +73,25 @@ const AddListing = () => {
                         </div>
                         <div className='mb-3'>
                             <label className="label">Description</label>
-                            <textarea className="textarea w-full" placeholder="Description"></textarea>
+                            <textarea name="description" className="textarea w-full" placeholder="Description"></textarea>
+                        </div>
+                        <div className='mb-3'>
+                            <label className="label">Photo URL</label>
+                            <input type="text" name="photoURL" className="input w-full outline-0" placeholder="photoURL" />
                         </div>
 
-                        <div>
-                            <button
-                                popoverTarget="cally-popover1"
-                                className="input input-border"
-                                id="cally1"
-                                style={{ anchorName: "--cally1" }}
-                            >
-                                {selectedDate || "Pick a date"}
-                            </button>
-
-                            <div
-                                popover
-                                id="cally-popover1"
-                                className="dropdown bg-base-100 rounded-box shadow-lg"
-                                style={{ positionAnchor: "--cally1" }}
-                            >
-                                <calendar-date ref={calendarRef} class="cally">
-                                    <svg aria-label="Previous" className="fill-current size-4" slot="previous" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path d="M15.75 19.5 8.25 12l7.5-7.5"></path>
-                                    </svg>
-                                    <svg aria-label="Next" className="fill-current size-4" slot="next" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
-                                    </svg>
-                                    <calendar-month></calendar-month>
-                                </calendar-date>
-                            </div>
+                        <div className='mb-3'>
+                            <label className="label">Date</label>
+                            <input name="date" type="date" className="input w-full" />
                         </div>
-                        
-                         <div className='mb-3'>
+
+                        <div className='mb-3'>
                             <label className="label">Email</label>
-                            <input type="email" name={user?.email} className="input w-full outline-0" value={user?.email} placeholder={user?.email} />
+                            <input type="email" name="email" readOnly className="input w-full outline-0" value={user?.email || ""} placeholder={user?.email} />
                         </div>
 
 
-                        <button type='submit' className="btn btn-neutral mt-4 w-full">Login</button>
+                        <button type='submit' className="btn btn-neutral mt-4 w-full">Add Listing</button>
                     </form>
                 </div>
             </div>
