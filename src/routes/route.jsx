@@ -5,6 +5,7 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import MyListing from "../pages/MyListing";
 import PrivateRoute from "./PrivateRoute";
+import AddListing from "../pages/AddListing";
 
 export const router = createBrowserRouter([
     {
@@ -21,6 +22,14 @@ export const router = createBrowserRouter([
                 element: (
                     <PrivateRoute>
                         <MyListing />
+                    </PrivateRoute>
+                )
+            },
+            {
+                path: 'add-listing',
+                element: (
+                    <PrivateRoute>
+                        <AddListing />
                     </PrivateRoute>
                 )
             },

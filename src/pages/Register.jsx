@@ -1,6 +1,6 @@
 import React, { use, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 
@@ -20,11 +20,34 @@ const Register = () => {
 
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleGoolgeSignIn = () => {
         signInWithGoogle()
             .then((result) => {
-                console.log(result.user);
+                // console.log(result.user);
+                const user = result.user
+                const saveUser = {
+                    name: user.displayName,
+                    email: user.email,
+                    photoURL: user.photoURL,
+                    createdAt: new Date()
+                };
+
+                fetch(`http://localhost:3000/users`, {
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify(saveUser)
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log("Save user", data);
+                    navigate(location.state || "/")
+                })
+
+                toast.success("Successfully Signed In");
             })
             .catch((error) => {
                 console.log(error);
@@ -36,21 +59,40 @@ const Register = () => {
         const displayName = e.target.displayName.value
         const email = e.target.email.value
         const password = e.target.password.value
-        const photoUrl = e.target.photoUrl.value
+        const photoURL = e.target.photoURL.value
 
         createUser(email, password)
             .then((result) => {
                 console.log(result.user);
-                updateUserProfile(displayName, photoUrl);
-                toast.success('Account Created Successfully', { id: 'create-user' });
-                navigate("/");
+                updateUserProfile(displayName, photoURL);
+
+                const saveUser = {
+                    name: displayName,
+                    email: email,
+                    password: password,
+                    photoURL: photoURL,
+                    createdAt: new Date()
+                }
+
+                fetch(`http://localhost:3000/users`, {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify(saveUser)
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log("Save user", data);
+                    toast.success('Account Created Successfully', { id: 'create-user' });
+                    navigate(location.state || "/");
+                })
                 e.target.reset();
             })
             .catch((error) => {
                 console.log(error);
                 toast.error(`Error: ${error.message}`, { id: 'create-user' });
             });
-
     }
 
 
@@ -59,7 +101,7 @@ const Register = () => {
             uppercase: !/[A-Z]/.test(password),
             lowercase: !/[a-z]/.test(password),
             number: !/[0-9]/.test(password),
-            specialChar: !/[!@#$%^&*(),.?":{}|<>]/.test(password),
+            specialChar: !/[!@#$%^&*(),.?":{}|<>/]/.test(password),
             lengths: !password.length >= 8
         })
     }
@@ -112,7 +154,7 @@ const Register = () => {
                         </div>
                         <div className='mb-3'>
                             <label className="label">Photo Url</label>
-                            <input type="text" name='photoUrl' className="input w-full outline-0" placeholder="Photo Url" />
+                            <input type="text" name='photoURL' className="input w-full outline-0" placeholder="Photo Url" />
                         </div>
                         <button type='submit' className="btn btn-neutral mt-4 w-full">Login</button>
                     </form>

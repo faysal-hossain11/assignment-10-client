@@ -1,9 +1,12 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 
 const Login = () => {
+
+    const [showPassword, setShowPassword] = useState(false);
     const { signInWithGoogle, signInUser } = use(AuthContext);
 
     const navigator = useNavigate();
@@ -13,6 +16,7 @@ const Login = () => {
         signInWithGoogle()
             .then((result) => {
                 console.log(result.user);
+                toast.success("Successfully Signed In")
                 navigator(location?.state || '/');
             })
             .catch((error) => {
@@ -38,6 +42,10 @@ const Login = () => {
     }
 
 
+    const handlePassword = () => {
+        setShowPassword(!showPassword);
+    }
+
 
     return (
         <div className='h-screen flex justify-center items-center'>
@@ -51,7 +59,12 @@ const Login = () => {
                         </div>
                         <div className='mb-3'>
                             <label className="label">Password</label>
-                            <input type="password" name='password' className="input w-full outline-0" placeholder="Password" />
+                            <div className='flex items-center gap-2 border-2 border-gray-600 pr-2 focus:border-2 rounded-md '>
+                                <input type={showPassword ? "text" : "password"} name='password' className="border-none input w-full outline-0" placeholder="Password" />
+                                {
+                                    <p onClick={handlePassword}> {showPassword ? <FaRegEye /> : <FaRegEyeSlash />} </p>
+                                }
+                            </div>
                         </div>
                         <div><a className="link link-hover">Forgot password?</a></div>
                         <button className="btn btn-neutral mt-4 w-full">Login</button>
