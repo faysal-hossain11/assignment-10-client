@@ -2,13 +2,19 @@ import React, { use, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
-import { Fa6, FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 
 const Register = () => {
 
     const [showPassword, setShowPassword] = useState(false);
-    const [passwordError, setPasswordError] = useState("");
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState('');
+    const [errors, setErrors] = useState({
+        uppercase: false,
+        lowercase: false,
+        number: false,
+        specialChar: false,
+        lengths: false
+    });
 
     const { signInWithGoogle, updateUserProfile, createUser } = use(AuthContext);
 
@@ -47,20 +53,24 @@ const Register = () => {
 
     }
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    const validatePassword = (password) => {
+        setErrors({
+            uppercase: !/[A-Z]/.test(password),
+            lowercase: !/[a-z]/.test(password),
+            number: !/[0-9]/.test(password),
+            specialChar: !/[!@#$%^&*(),.?":{}|<>]/.test(password),
+            lengths: !password.length >= 8
+        })
+    }
 
     const handlePasswordChange = (e) => {
-        const value = e.target.value;
-        setPassword(value);
+        const pwd = e.target.value
+        setPassword(pwd);
+        validatePassword(pwd);
+    }
 
-        if (!passwordRegex.test(value)) {
-            setPasswordError(
-                "Password must be 8+ chars, include uppercase, lowercase, number & special character."
-            );
-        } else {
-            setPasswordError("");
-        }
-    };
+
 
 
     const handlePassword = () => {
@@ -88,18 +98,23 @@ const Register = () => {
                             <div className='flex items-center gap-2 border-2 border-gray-600 pr-2 focus:border-2 rounded-md '>
                                 <input type={showPassword ? "text" : "password"} value={password} onChange={handlePasswordChange} name='password' className="border-none input w-full outline-0" placeholder="Password" />
                                 {
-                                   <p onClick={handlePassword}> {showPassword ? <FaRegEye /> : <FaRegEyeSlash /> } </p>
+                                    <p onClick={handlePassword}> {showPassword ? <FaRegEye /> : <FaRegEyeSlash />} </p>
                                 }
                             </div>
-                            {passwordError && (
-                                <p className="text-red-500 text-sm mt-1">{passwordError}</p>
-                            )}
+
+                            {errors.uppercase && <p className='text-red-500 text-sm'>Must include an uppercase letter (A-Z)</p>}
+                            {errors.lowercase && <p className='text-red-500 text-sm'>Must include a lowercase letter (a-z)</p>}
+                            {errors.number && <p className='text-red-500 text-sm'>Must include a number (0-9)</p>}
+                            {errors.specialChar && <p className='text-red-500 text-sm'>Must include a symbol (!@#$…)</p>}
+                            {errors.lengths && <p className='text-red-500 text-sm'>Minimum 8 characters required</p>}
+
+
                         </div>
                         <div className='mb-3'>
                             <label className="label">Photo Url</label>
                             <input type="text" name='photoUrl' className="input w-full outline-0" placeholder="Photo Url" />
                         </div>
-                        <button disabled={passwordError || !password} type='submit' className="btn btn-neutral mt-4 w-full">Login</button>
+                        <button type='submit' className="btn btn-neutral mt-4 w-full">Login</button>
                     </form>
                     {/* Google */}
                     <div className='flex gap-4 items-center'>
