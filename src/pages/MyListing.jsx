@@ -1,43 +1,53 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import MyListingCard from "../components/MyListingCard";
+import { AuthContext } from "../context/AuthContext";
 
 const MyListing = () => {
-    
     const [listings, setListings] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const { user } = use(AuthContext);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/latest-listings`)
-        .then((res) => res.json())
-        .then((data) => {
-            setListings(data)
-            console.log("listing ", listings);
-            
-            setLoading(false)
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-    }, [])
+        if (!user?.email) return;
 
+        fetch(`http://localhost:3000/my-listings?email=${user.email}`, {
+            headers: {
+                authorization: `Bearer ${user.accessToken}`,
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (Array.isArray(data)) {
+                    setListings(data);
+                } else {
+                    setListings([]);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error fetching listings:", error);
+                setLoading(false);
+            });
+    }, [user, listings, setListings]);
 
-    if(loading) return <p className="text-center">loading...</p>
+    if (loading) return <p className="text-center">Loading...</p>;
 
     return (
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {
-                listings ? (
-                    listings.map((listing) => {
-                        return (
-                            <MyListingCard key={listing?._id} listing={listing} />
-                        )
-                    })
+        <div className="max-w-[1440px] mx-auto py-16">
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {listings ? (
+                    listings.map((myListing) => (
+                        <MyListingCard key={myListing?._id} myListing={myListing} />
+                    ))
                 ) : (
-                    <p>No Listings</p>
-                )
-            }
+                    <p className="text-center col-span-3 mt-6 text-gray-500">
+                        No Listings Found
+                    </p>
+                )}
+            </div>
         </div>
+
+
     );
 };
 

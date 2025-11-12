@@ -19,7 +19,7 @@ const AddListing = () => {
             description: e.target.description.value,
             image: e.target.photoURL.value,
             date: e.target.date.value,
-            email: e.target.email.value
+            email: user?.email
         }
 
         fetch('http://localhost:3000/add-listing', {

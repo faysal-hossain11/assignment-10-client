@@ -28,8 +28,9 @@ const Header = () => {
             {
                 user && (
                     <div className='flex items-center gap-4'>
-                        <li className='list-none'><Link className='font-semibold' to='/latest-listings'>My Listings</Link></li>
+                        <li className='list-none'><Link className='font-semibold' to='/my-listings'>My Listings</Link></li>
                         <li className='list-none'><Link className='font-semibold' to='/add-listing'>Add Listing</Link></li>
+                        <li className='list-none'><Link className='font-semibold' to='/my-orders'>My Orders</Link></li>
                     </div>
                 )
             }

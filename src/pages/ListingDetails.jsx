@@ -1,6 +1,7 @@
 import React, { use, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useParams } from 'react-router';
+import { toast } from 'react-toastify';
 
 const ListingDetails = () => {
 
@@ -32,7 +33,7 @@ const ListingDetails = () => {
 
         const order = {
             buyerName: e.target.buyerName.value,
-            email: e.target.email.value,
+            email: user?.email,
             productId: e.target.productId.value,
             productName: e.target.productName.value,
             quantity: e.target.quantity.value,
@@ -44,7 +45,29 @@ const ListingDetails = () => {
         }
 
         console.log(order);
-        
+
+        fetch('http://localhost:3000/order', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(order)
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("Save order", data);
+                toast.success("Order placed successfully");
+                e.target.reset();
+
+                // close the modal 
+                document.getElementById('my_modal_5').close();
+
+
+            })
+            .catch((error) => {
+                console.error("Error placing order:", error);
+                toast.error("Failed to place order");
+            })
 
 
     }
@@ -74,6 +97,11 @@ const ListingDetails = () => {
                     </div>
                     <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                         <div className="modal-box">
+
+                            <form method="dialog">
+                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+
                             <h3 className="font-bold text-2xl text-center mb-6">Order</h3>
                             <div>
                                 <form onSubmit={handleOrderSubmit}>
@@ -95,7 +123,7 @@ const ListingDetails = () => {
                                     </div>
                                     <div className='mb-3'>
                                         <label className="label">Quantity</label>
-                                        <input type="number" name="quantity" className="input w-full outline-0" defaultValue={1}  min="1" />
+                                        <input type="number" name="quantity" className="input w-full outline-0" defaultValue={1} min="1" />
                                     </div>
 
                                     <div className='mb-3'>
@@ -122,13 +150,6 @@ const ListingDetails = () => {
                                         <button type='submit' className='w-full py-2 bg-sky-300 hover:bg-sky-500 tranistion-all duration-300 rounded-sm cursor-pointer ' >Order Now</button>
                                     </div>
                                 </form>
-                            </div>
-                            <div className="modal-action">
-                                <form method="dialog">
-                                    {/* if there is a button in form, it will close the modal */}
-                                    <button className="btn">Close</button>
-                                </form>
-
                             </div>
                         </div>
                     </dialog>

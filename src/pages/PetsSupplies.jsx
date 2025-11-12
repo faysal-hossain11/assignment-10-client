@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLoaderData } from 'react-router';
-import MyListingCard from '../components/MyListingCard';
+import ListingCard from '../components/ListingCard';
 import ListingDetails from './ListingDetails';
 
 const PetsSupplies = () => {
@@ -15,7 +15,7 @@ const PetsSupplies = () => {
                         {
                             allListings.map((listing) => {
                                 return(
-                                    <MyListingCard key={listing?._id} listing={listing}/>
+                                    <ListingCard key={listing?._id} listing={listing}/>
                                 )
                             })
                         }

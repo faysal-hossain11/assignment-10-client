@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import AddListing from "../pages/AddListing";
 import PetsSupplies from "../pages/PetsSupplies";
 import ListingDetails from "../pages/ListingDetails";
+import MyOrder from "../pages/MyOrder";
 
 export const router = createBrowserRouter([
     {
@@ -25,7 +26,7 @@ export const router = createBrowserRouter([
                 loader: () => fetch('http://localhost:3000/all-listings').then(res => res.json())
             },
             {
-                path: '/latest-listings',
+                path: '/my-listings',
                 element: (
                     <PrivateRoute>
                         <MyListing />
@@ -37,6 +38,14 @@ export const router = createBrowserRouter([
                 element: (
                     <PrivateRoute>
                         <AddListing />
+                    </PrivateRoute>
+                )
+            },
+            {
+                path: '/my-orders',
+                element: (
+                    <PrivateRoute>
+                        <MyOrder />
                     </PrivateRoute>
                 )
             },
