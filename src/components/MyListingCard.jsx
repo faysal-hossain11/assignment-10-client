@@ -16,7 +16,7 @@ const MyListingCard = ({ listing }) => {
                     <p className="text-xs ">{listing?.location}</p>
                 </div>
                 <div className="mt-4">
-                    <Link className="text-sm bg-primary text-white px-3 py-2 rounded-lg">See Details</Link>
+                    <Link className="text-sm bg-primary text-white px-3 py-2 rounded-lg" to={`/listing-details/${listing?._id}`}>See Details</Link>
                 </div>
             </div>
         </article>

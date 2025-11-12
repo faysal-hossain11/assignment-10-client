@@ -6,6 +6,8 @@ import Login from "../pages/Login";
 import MyListing from "../pages/MyListing";
 import PrivateRoute from "./PrivateRoute";
 import AddListing from "../pages/AddListing";
+import PetsSupplies from "../pages/PetsSupplies";
+import ListingDetails from "../pages/ListingDetails";
 
 export const router = createBrowserRouter([
     {
@@ -18,6 +20,11 @@ export const router = createBrowserRouter([
                 Component: Home,
             },
             {
+                path: '/pets-supplies',
+                Component: PetsSupplies,
+                loader: () => fetch('http://localhost:3000/all-listings').then(res => res.json())
+            },
+            {
                 path: '/latest-listings',
                 element: (
                     <PrivateRoute>
@@ -26,10 +33,18 @@ export const router = createBrowserRouter([
                 )
             },
             {
-                path: 'add-listing',
+                path: '/add-listing',
                 element: (
                     <PrivateRoute>
                         <AddListing />
+                    </PrivateRoute>
+                )
+            },
+            {
+                path: '/listing-details/:id',
+                element: (
+                    <PrivateRoute>
+                        <ListingDetails />
                     </PrivateRoute>
                 )
             },
