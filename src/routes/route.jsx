@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
             {
                 path: '/pets-supplies',
                 Component: PetsSupplies,
-                loader: () => fetch('http://localhost:3000/all-listings').then(res => res.json())
+                loader: () => fetch('https://assignment-ten-server-blond-seven.vercel.app/all-listings').then(res => res.json())
             },
             {
                 path: '/my-listings',

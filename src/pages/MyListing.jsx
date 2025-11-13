@@ -11,7 +11,7 @@ const MyListing = () => {
     useEffect(() => {
         if (!user?.email) return;
 
-        fetch(`http://localhost:3000/my-listings?email=${user.email}`, {
+        fetch(`https://assignment-ten-server-blond-seven.vercel.app/my-listings?email=${user.email}`, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`,
             },

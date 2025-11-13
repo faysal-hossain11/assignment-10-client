@@ -15,7 +15,7 @@ const ListingDetails = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:3000/listing/${id}`, {
+        fetch(`https://assignment-ten-server-blond-seven.vercel.app/listing/${id}`, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`,
             },
@@ -47,7 +47,7 @@ const ListingDetails = () => {
 
         console.log(order);
 
-        fetch('http://localhost:3000/order', {
+        fetch('https://assignment-ten-server-blond-seven.vercel.app/order', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

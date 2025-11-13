@@ -11,7 +11,7 @@ const MyOrder = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:3000/my-orders?email=${user.email}`, {
+    fetch(`https://assignment-ten-server-blond-seven.vercel.app/my-orders?email=${user.email}`, {
       method: 'GET',
       headers: {
         authorization: `Bearer ${user.accessToken}`,

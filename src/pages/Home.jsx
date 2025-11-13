@@ -11,7 +11,7 @@ const Home = () => {
     const [latestListings, setLatestListings] = useState([]);
     const [petHeroes, setPetHeroes] = useState([]);
 
-    fetch('http://localhost:3000/latest-listings')
+    fetch('https://assignment-ten-server-blond-seven.vercel.app/latest-listings')
         .then(res => res.json())
         .then(data => {
             console.log('latest Listings:', data);
@@ -21,7 +21,7 @@ const Home = () => {
             console.error('Error fetching listings:', error);
         });
 
-    fetch('http://localhost:3000/pet-heroes')
+    fetch('https://assignment-ten-server-blond-seven.vercel.app/pet-heroes')
         .then(res => res.json())
         .then(data => {
             console.log('Pet Heroes:', data);

@@ -23,7 +23,7 @@ const AddListing = () => {
             email: user?.email
         }
 
-        fetch('http://localhost:3000/add-listing', {
+        fetch('https://assignment-ten-server-blond-seven.vercel.app/add-listing', {
             method: 'POST',
             headers: {
                 "Content-type": "application/json"

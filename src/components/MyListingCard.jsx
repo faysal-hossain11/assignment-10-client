@@ -20,7 +20,7 @@ const MyListingCard = ({ myListing }) => {
             email: user?.email,
         };
 
-        fetch(`http://localhost:3000/update-my-listing/${myListing._id}`, {
+        fetch(`https://assignment-ten-server-blond-seven.vercel.app/update-my-listing/${myListing._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ const MyListingCard = ({ myListing }) => {
 
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:3000/delete-my-listing/${id}`, {
+        fetch(`https://assignment-ten-server-blond-seven.vercel.app/delete-my-listing/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

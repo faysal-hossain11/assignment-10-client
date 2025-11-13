@@ -34,7 +34,7 @@ const Register = () => {
                     createdAt: new Date()
                 };
 
-                fetch(`http://localhost:3000/users`, {
+                fetch(`https://assignment-ten-server-blond-seven.vercel.app/users`, {
                     method: 'POST',
                     headers: {
                         "Content-type": "application/json"
@@ -74,7 +74,7 @@ const Register = () => {
                     createdAt: new Date()
                 }
 
-                fetch(`http://localhost:3000/users`, {
+                fetch(`https://assignment-ten-server-blond-seven.vercel.app/users`, {
                     method: "POST",
                     headers: {
                         "Content-type": "application/json"
