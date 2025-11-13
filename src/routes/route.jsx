@@ -9,6 +9,7 @@ import AddListing from "../pages/AddListing";
 import PetsSupplies from "../pages/PetsSupplies";
 import ListingDetails from "../pages/ListingDetails";
 import MyOrder from "../pages/MyOrder";
+import NotFoundPage from "../pages/NotFoundPage";
 
 export const router = createBrowserRouter([
     {
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
             {
                 path: '/register',
                 Component: Register
+            },
+            {
+                path: '*',
+                Component: NotFoundPage
             }
         ]
     }

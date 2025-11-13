@@ -61,19 +61,19 @@ const MyListingCard = ({ myListing }) => {
     return (
         <div className='p-2 border border-gray-300 rounded-md shadow-md shadow-gray-500'>
             <div className='flex gap-4 '>
-                <div>
-                    <img src={myListing?.image} alt={myListing?.name} />
+                <div className='w-1/2'>
+                    <img src={myListing?.image} alt={myListing?.name} className='w-full' />
                 </div>
-                <div>
-                    <h2>{myListing?.name}</h2>
-                    <p>{myListing?.category}</p>
-                    <p>$ {myListing?.price}</p>
-                    <p>{myListing?.location}</p>
+                <div className='w-1/2'>
+                    <h2 className='text-2xl mb-3 font-bold'>{myListing?.name}</h2>
+                    <p className='text-md mb-1 font-semibold'> Category:{myListing?.category}</p>
+                    <p className='text-md mb-1 font-semibold'> Price: ${myListing?.price}</p>
+                    <p className='text-md mb-1 font-semibold'> Location:{myListing?.location}</p>
                 </div>
             </div>
             <div className='flex gap-2 items-center'>
-                <button onClick={() => document.getElementById(`modal-${myListing._id}`).showModal()} to={myListing?._id} className='bg-sky-300 hover:bg-sky-500 transition-all duration-300 px-3 py-2 rounded-md mt-4 w-full cursor-pointer'>Update</button>
-                <button onClick={() => document.getElementById(`delete-modal-${myListing._id}`).showModal()} to={myListing?._id} className='bg-red-400 hover:bg-red-500 transition-all duration-300 px-3 py-2 rounded-md mt-4 w-full cursor-pointer'>Delete</button>
+                <button onClick={() => document.getElementById(`modal-${myListing._id}`).showModal()} to={myListing?._id} className='bg-sky-300 hover:bg-sky-500 text-white transition-all duration-300 px-3 py-2 rounded-md mt-4 w-full cursor-pointer'>Update</button>
+                <button onClick={() => document.getElementById(`delete-modal-${myListing._id}`).showModal()} to={myListing?._id} className='bg-red-400 hover:bg-red-500 text-white transition-all duration-300 px-3 py-2 rounded-md mt-4 w-full cursor-pointer'>Delete</button>
             </div>
 
             <dialog id={`modal-${myListing._id}`} className="modal">
